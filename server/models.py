@@ -50,7 +50,7 @@ class Order(db.Model, SerializerMixin):
     serialize_rules = ('-user.orders','-product.orders',)
 
     id = db.Column(db.Integer, primary_key=True)
-    total_price = db.Column(db.Float)
+    quantity = db.Column(db.String)
     product_id = db.Column(db.Integer, db.ForeignKey('products.id'))
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 

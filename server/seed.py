@@ -40,7 +40,7 @@ def create_products():
         product = Product(
             name = fake.name(),
             description = fake.sentence(),
-            price = round(random.uniform(1.50, 59.99), 2)
+            price = round(random.uniform(1.50, 59.99), 2),
         )
         products.append(product)
     return products
@@ -49,9 +49,9 @@ def create_orders(products, users):
     orders = []
     for i in range(12):
         order = Order(
-            total_price = round(random.uniform(1.50, 59.99), 2),
-            product_id = ([product.id for product in products]),
-            user_id = ([user.id for user in users])
+            quantity = random.randint(0,10),
+            product_id = rc([product.id for product in products]),
+            user_id = rc([user.id for user in users]),
         )
         orders.append(order)
     return orders
@@ -77,7 +77,7 @@ if __name__ == '__main__':
         db.session.commit()
 
         print("Creating orders...")
-        orders = create_orders()
+        orders = create_orders(products, users)
         db.session.add_all(orders)
         db.session.commit()
 
