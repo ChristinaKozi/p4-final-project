@@ -9,7 +9,7 @@ from faker import Faker
 
 # Local imports
 from app import app
-from models import db, User, Order, Product
+from models import db, User, Review, Product
 
 fake = Faker()
 
@@ -36,7 +36,7 @@ def create_users():
 
 def create_products():
     products = []
-    for i in range(5):
+    for i in range(10):
         product = Product(
             name = fake.name(),
             description = fake.sentence(),
@@ -45,16 +45,17 @@ def create_products():
         products.append(product)
     return products
 
-def create_orders(products, users):
-    orders = []
+def create_reviews(products, users):
+    reviews = []
     for i in range(12):
-        order = Order(
-            quantity = random.randint(0,10),
+        review = Review(
+            rating = randint(0,5),
+            comment = fake.sentence(),
             product_id = rc([product.id for product in products]),
             user_id = rc([user.id for user in users]),
         )
-        orders.append(order)
-    return orders
+        reviews.append(review)
+    return reviews
 
 
 if __name__ == '__main__':
@@ -64,7 +65,7 @@ if __name__ == '__main__':
     
         User.query.delete()
         Product.query.delete()
-        Order.query.delete()
+        Review.query.delete()
 
         print("Creating users...")
         users = create_users()
@@ -77,8 +78,8 @@ if __name__ == '__main__':
         db.session.commit()
 
         print("Creating orders...")
-        orders = create_orders(products, users)
-        db.session.add_all(orders)
+        reviews = create_reviews(products, users)
+        db.session.add_all(reviews)
         db.session.commit()
 
         print("Complete.")

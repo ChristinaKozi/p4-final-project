@@ -6,7 +6,7 @@ from config import db, bcrypt
 
 class User(db.Model, SerializerMixin):
     __tablename__ = 'users'
-    serialize_rules = ('-orders.user',)
+    serialize_rules = ('-reviews.user',)
 
     id = db.Column(db.Integer, primary_key = True)
     username = db.Column(db.String, unique = True, nullable = False)
@@ -26,39 +26,40 @@ class User(db.Model, SerializerMixin):
         return bcrypt.check_password_hash(
             self._password_hash, password.encode('utf-8'))
 
-    orders = db.relationship('Order', back_populates = 'user', cascade='all, delete-orphan')
+    reviews = db.relationship('Review', back_populates = 'user', cascade='all, delete-orphan')
 
     def __repr__(self):
         return f'<User {self.id}: {self.name}'
 
 class Product(db.Model, SerializerMixin):
     __tablename__ = 'products'
-    serialize_rules = ('-orders.product',)
+    serialize_rules = ('-reviews.product',)
     
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
     description = db.Column(db.String)
     price = db.Column(db.Float)
 
-    orders = db.relationship('Order', back_populates = 'product', cascade='all, delete-orphan')
+    reviews = db.relationship('Review', back_populates = 'product', cascade='all, delete-orphan')
 
     def __repr__(self):
         return f'<Product {self.id}: {self.name}'
 
-class Order(db.Model, SerializerMixin):
-    __tablename__ = 'orders'
-    serialize_rules = ('-user.orders','-product.orders',)
+class Review(db.Model, SerializerMixin):
+    __tablename__ = 'reviews'
+    serialize_rules = ('-user.reviews','-product.reviews',)
 
     id = db.Column(db.Integer, primary_key=True)
-    quantity = db.Column(db.String)
+    rating = db.Column(db.Integer)
+    comment = db.Column(db.String)
     product_id = db.Column(db.Integer, db.ForeignKey('products.id'))
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
-    user = db.relationship('User', back_populates = 'orders')
-    product = db.relationship('Product', back_populates = 'orders')
+    user = db.relationship('User', back_populates = 'reviews')
+    product = db.relationship('Product', back_populates = 'reviews')
 
     def __repr__(self):
-        return f'<Order {self.id}'
+        return f'<Review {self.id}'
 
 
 
