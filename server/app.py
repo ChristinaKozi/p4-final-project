@@ -82,6 +82,14 @@ class Logout(Resource):
 
 api.add_resource(Logout, '/logout', endpoint = 'logout')
 
+class Products(Resource):
+    def get(self):
+        products = Product.query.all()
+        product_dict = [product.to_dict() for product in products]
+        return make_response(product_dict, 200)
+
+api.add_resource(Products, '/products')
+
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
 
