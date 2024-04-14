@@ -85,10 +85,42 @@ api.add_resource(Logout, '/logout', endpoint = 'logout')
 class Products(Resource):
     def get(self):
         products = Product.query.all()
-        product_dict = [product.to_dict() for product in products]
-        return make_response(product_dict, 200)
+        if products:
+            product_dict = [product.to_dict() for product in products]
+            return make_response(product_dict, 200)
+        
+        return make_response({'error':'Product not found'}, 404)
+
 
 api.add_resource(Products, '/products')
+
+class ProductsById(Resource):
+    def get(self, id):
+        product = Product.query.filter(Product.id==id).first()
+        if product: 
+            return make_response(product.to_dict(), 200)
+
+        return make_response({'error':'Product not found'}, 404)
+    
+    def delete(self, id):
+        product = Product.query.filter(Product.id==id).first()
+        if product is None: 
+            return make_response({"error": "Product not found"}, 404)
+        
+        db.session.delete(product)
+        db.session.commit
+
+        return make_response({'message':''}, 204)
+
+api.add_resource(ProductsById, '/products/<int:id>')
+
+class Reviews(Resource):
+    def get(self):
+        reviews = Review.query.all()
+        review_dict = [review.to_dict() for review in reviews]
+        return make_response(review_dict, 200)
+
+api.add_resource(Reviews, '/reviews')
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
