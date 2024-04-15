@@ -90,7 +90,22 @@ class Products(Resource):
             return make_response(product_dict, 200)
         
         return make_response({'error':'Product not found'}, 404)
+    
+    def post(self):
+        data = request.get_json()
+        try:
+            new_product = Product(
+                name = data['name'],
+                description = data['description'],
+                price = data['price']
+            )
 
+            db.session.add(new_product)
+            db.session.commit()
+            return make_response(new_product.to_dict(), 201)
+        
+        except: 
+            return make_response({ "errors": ["validation errors"] }, 400)
 
 api.add_resource(Products, '/products')
 
@@ -104,13 +119,12 @@ class ProductsById(Resource):
     
     def delete(self, id):
         product = Product.query.filter(Product.id==id).first()
-        if product is None: 
-            return make_response({"error": "Product not found"}, 404)
+        if product: 
+            db.session.delete(product)
+            db.session.commit()
+            return make_response({'message':'Product deleted'}, 204)
         
-        db.session.delete(product)
-        db.session.commit
-
-        return make_response({'message':''}, 204)
+        return make_response({"error": "Product not found"}, 404)
 
 api.add_resource(ProductsById, '/products/<int:id>')
 
@@ -119,8 +133,57 @@ class Reviews(Resource):
         reviews = Review.query.all()
         review_dict = [review.to_dict() for review in reviews]
         return make_response(review_dict, 200)
+    
+    def post(self):
+        data = request.get_json()
+        try:
+            new_review = Review(
+                rating = data['rating'],
+                comment = data['comment'],
+                product_id = data['product_id'],
+                user_id = data['user_id'],
+            )
+            db.session.add(new_review)
+            db.session.commit()
+            return make_response(new_review.to_dict(), 201)
+        except:
+            return make_response({ "errors": ["validation errors"] }, 400)
 
 api.add_resource(Reviews, '/reviews')
+
+class ReviewsByID(Resource):
+    def get(self, id):
+        review = Review.query.filter(Review.id == id).first()
+        if review:
+            return make_response(review.to_dict(), 200)
+        return make_response({'error':'Review not found'}, 404)
+            
+    def patch(self, id):
+        data = request.get_json()
+        review = Review.query.filter(Review.id == id).first()
+        try:
+            for attr in data:
+                setattr(review, attr, data[attr])
+
+            db.session.add(review)
+            db.session.commit()
+
+            return make_response(review.to_dict(), 202)
+        
+        except ValueError as e:
+            return make_response({"errors":["validation errors"]}, 400)
+    
+    def delete(self, id):
+        review = Review.query.filter(Review.id == id).first()
+        if review:
+            db.session.delete(review)
+            db.session.commit()
+
+            return make_response({'message':'Review Deleted'}, 204)
+        
+        return make_response({"error": "Product not found"}, 404)
+    
+api.add_resource(ReviewsByID, '/reviews/<int:id>')
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
