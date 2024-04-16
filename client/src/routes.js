@@ -1,26 +1,18 @@
-import Home from "./pages/Home";
+
+//import Login from "./pages/Login";
 import ErrorPage from "./pages/ErrorPage";
+import App from "./components/App";
 
 
 const routes = [
     {
         path: "/",
-        element: <Home />,
+        element: <App />,
         errorElement: <ErrorPage />
     }
     // {
-    //     path: "/about",
-    //     element: <About />,
-    //     errorElement: <ErrorPage />
-    // },
-    // {
-    //     path: "/challenge",
-    //     element: <Challenge />,
-    //     errorElement: <ErrorPage />
-    // },
-    // {
-    //     path: "/songs",
-    //     element: <Songs />,
+    //     path: "/login",
+    //     element: <Login />,
     //     errorElement: <ErrorPage />
     // }
 ]

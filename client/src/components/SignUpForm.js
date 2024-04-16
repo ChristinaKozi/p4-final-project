@@ -1,80 +1,92 @@
 import React, { useState } from "react";
 import { Box, Button, Error, FormField, Input, Label, Textarea } from "../styles";
+import * as yup from 'yup'
+import { useFormik } from 'formik';
+import { headers } from "../Globals";
 
-function SignUpForm() {
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const [passwordConfirmation, setPasswordConfirmation] = useState("");
+function SignUpForm({ onLogin }) {
+
     const [errors, setErrors] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
-    function handleSubmit(e) {
-        e.preventDefault();
-        setErrors([]);
+    function handleSubmit(values) {
         setIsLoading(true);
         fetch("/signup", {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                username,
-                password,
-                passwordConfirmation: passwordConfirmation
-            }),
-        }).then((r)=> {
-            console.log(r)
+            headers: headers,
+            body: JSON.stringify(values),
+        })
+        .then((r)=> {
             setIsLoading(false);
-            if (r.ok) {
-                r.json().then((user) => console.log(user));
+            if (r.status == 201) {
+                r.json().then(user=>{
+                    onLogin(user)
+                })
             } else {
-                r.json().then((err)=> setErrors(err.errors));
+                r.json().then((data)=> {
+                    if (data.error) {
+                        setErrors([data.error])
+                    } else {
+                        setErrors(data.errors);
+                    }
+                });
             }
-        });
+        })
     }
+
+    const schema = yup.object({
+        username: yup.string().min(3).required(),
+        password: yup.string().required()
+    })
         
+    const formik = useFormik({
+        initialValues: {
+            username: "",
+            password: ""
+        },
+        validationSchema: schema,
+        onSubmit: handleSubmit
+    })
+
+    const displayErrors = (error) => {
+        return error ? <p style={{ color: "red" }}>{ error }</p> : null;
+    }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <FormField>
-                <Label>Username:</Label>
-                <Input
-                    type='text'
-                    id='username'
-                    placeholder="Username"
-                    value={username}
-                    onChange={(e)=>{setUsername(e.target.value)}}>
-                </Input>
-            </FormField>
-            <FormField>
-                <Label>Password:</Label>
-                <Input
-                    type='password'
-                    id='password'
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e)=>{setPassword(e.target.value)}} 
-                />
-            </FormField>
-            <FormField>
-                <Label>Password Confirmation: </Label>
-                <Input
-                    type="password"
-                    id="password_confirmation"
-                    placeholder="Re-Enter Password"
-                    value={passwordConfirmation}
-                    onChange={(e) => setPasswordConfirmation(e.target.value)}
-                />
-            </FormField>
-            <FormField>
-                <Button type='submit'>{isLoading ? "Loading..." : "Sign Up"}</Button>
-            </FormField>
-            <FormField>
-                {errors.map((err)=>(
-                    <Error key={err}>{err}</Error>
-                ))}
-            </FormField>
-        </form>
+        <div className = 'signup'>
+            <form onSubmit={ formik.handleSubmit }>
+                <FormField>
+                    <Label>Username:</Label>
+                    <Input
+                        type='text'
+                        id='username'
+                        placeholder="Username"
+                        value={formik.values.username}
+                        onChange={ formik.handleChange }>
+                    </Input>
+                    { displayErrors(formik.errors.username) }
+                </FormField>
+                <FormField>
+                    <Label>Password:</Label>
+                    <Input
+                        type='password'
+                        id='password'
+                        placeholder="Password"
+                        value={formik.values.password}
+                        onChange={ formik.handleChange } 
+                    />
+                    { displayErrors(formik.errors.password) }
+                </FormField>
+                <FormField>
+                    <Button type='submit'>{isLoading ? "Loading..." : "Sign Up"}</Button>
+                </FormField>
+                <FormField>
+                    {errors.map((err)=>(
+                        <Error key={err}>{err}</Error>
+                    ))}
+                </FormField>
+            </form>
+        </div>
     )
 }
 

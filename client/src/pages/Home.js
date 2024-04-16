@@ -1,13 +1,28 @@
-import React from "react";
-import SignUpForm from "../components/SignUpForm";
+import React, { useEffect, useState } from "react";
+import NavBar from "../components/NavBar";
+import ProductCard from "../components/ProductCard";
 
-function Home() {
+function Home({ user, setUser }) {
+
+    const [products, setProducts] = useState([])
+
+    useEffect(()=>{
+        fetch('/products')
+        .then((r)=>r.json())
+        .then(data=> setProducts(data))
+    },[])
+
+    const productList = products.map(product=>{
+        return <ProductCard key={product.id} product={product}/>
+    })
+
     return (
-        <div>
-            <h1>Home</h1>
-            <SignUpForm />
-        </div>
+        <>
+        <NavBar user={user} setUser={setUser} />
+        <h1>Products</h1>
+        {productList}
+        </>
     )
-};
+}
 
 export default Home;
