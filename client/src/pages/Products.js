@@ -17,7 +17,7 @@ function Products() {
         <>
         <NavBar />
         <h1>Products</h1>
-        {user? productList: <h3>Must be loggin in to access</h3>}
+        {user ? productList : <h3>Must be logged in to access</h3>}
         </>
     )
 }

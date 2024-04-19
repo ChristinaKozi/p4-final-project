@@ -60,7 +60,6 @@ function ReviewForm({ product, reviews, setReviews }) {
 
     function handleReviewClick() {
         setShowReviewForm(!showReviewForm)
-
     }
 
     return (

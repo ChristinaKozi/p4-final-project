@@ -5,11 +5,13 @@ import * as yup from 'yup'
 import { useFormik } from "formik";
 import { headers } from "../Globals";
 import { ProductContext } from "../contents/ProductContext";
-
+import { UserContext } from "../contents/UserContext";
 
 function ProductForm() {
-    const [errors, setErrors] = useState([]);
+    const { user } = useContext(UserContext)
     const { products, setProducts } = useContext(ProductContext)
+
+    const [errors, setErrors] = useState([]);
 
     function handleSubmit(values, { resetForm }) {
         fetch("/products", {
@@ -59,6 +61,7 @@ function ProductForm() {
         <>
         <NavBar />
         <h1>Add New Product:</h1>
+        { user ? <>
         <form onSubmit={ formik.handleSubmit }>
             <FormField >
                 <Label>Product Name:</Label>
@@ -98,7 +101,9 @@ function ProductForm() {
                     <Error key={err}>{err}</Error>
                 ))}
             </FormField>
-        </form>
+        </form> 
+        </>
+        : <h3>Must be logged in to post</h3> }
         </>
     )
 }

@@ -10,8 +10,20 @@ function ProductCard({ product }) {
     const [noReviews, setNoReviews] = useState(false)
     const [reviews, setReviews] = useState(product.reviews)
 
+    function handleDeleteReview() {
+        console.log('deleted')
+    }
+
+    function handleUpdateReview() {
+        console.log('edit')
+    }
+
     const reviewList = reviews.map(review => {
-        return <ReviewCard key ={review.id} review={review} showReviews={showReviews} noReviews={noReviews} />
+        return <ReviewCard key={review.id} 
+            review={review} 
+            showReviews={showReviews}  
+            onDelete={handleDeleteReview} 
+            onUpdate={handleUpdateReview}/>
     })
 
     function handleClick() {
