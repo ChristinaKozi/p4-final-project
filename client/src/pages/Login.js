@@ -5,7 +5,7 @@ import { Button } from "../styles";
 import styled from "styled-components";
 import NavBar from "../components/NavBar";
 
-function Login({ onLogin }) {
+function Login() {
     const [showLogin, setShowLogin] = useState(true);
 
     return (
@@ -14,7 +14,7 @@ function Login({ onLogin }) {
             {showLogin ? (
                 <>
                 <h2>Login</h2>
-                <LoginForm onLogin={onLogin} />
+                <LoginForm />
                 <Divider />
                 <p>
                   Don't have an account? &nbsp;
@@ -26,7 +26,7 @@ function Login({ onLogin }) {
             ) : (
             <>
                 <h2>Create Account</h2>
-                <SignUpForm onLogin={onLogin} />
+                <SignUpForm />
                 <Divider />
                 <p>
                   Already have an account? &nbsp;

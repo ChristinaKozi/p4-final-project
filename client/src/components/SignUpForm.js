@@ -1,13 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Box, Button, Error, FormField, Input, Label, Textarea } from "../styles";
 import * as yup from 'yup'
 import { useFormik } from 'formik';
 import { headers } from "../Globals";
+import { UserContext } from "../contents/UserContext";
 
-function SignUpForm({ onLogin }) {
+function SignUpForm() {
 
     const [errors, setErrors] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+
+    const { setUser } = useContext(UserContext)
 
     function handleSubmit(values) {
         setIsLoading(true);
@@ -20,7 +23,7 @@ function SignUpForm({ onLogin }) {
             setIsLoading(false);
             if (r.status == 201) {
                 r.json().then(user=>{
-                    onLogin(user)
+                    setUser(user)
                 })
             } else {
                 r.json().then((data)=> {

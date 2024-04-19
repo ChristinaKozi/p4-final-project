@@ -1,26 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext } from "react";
 import NavBar from "../components/NavBar";
-import ProductCard from "../components/ProductCard";
+import { UserContext } from "../contents/UserContext";
 
-function Home({ user, setUser }) {
-
-    const [products, setProducts] = useState([])
-
-    useEffect(()=>{
-        fetch('/products')
-        .then((r)=>r.json())
-        .then(data=> setProducts(data))
-    },[])
-
-    const productList = products.map(product=>{
-        return <ProductCard key={product.id} product={product}/>
-    })
+function Home() {
+    const { user, setUser } = useContext(UserContext)
 
     return (
         <>
-        <NavBar user={user} setUser={setUser} />
-        <h1>Products</h1>
-        {productList}
+        <NavBar />
+        <h1>Home</h1>
         </>
     )
 }

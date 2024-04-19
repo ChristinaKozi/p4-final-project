@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Box, Button, Error, FormField, Input, Label, Textarea } from "../styles";
 import * as yup from 'yup'
 import { useFormik } from "formik";
 import { headers } from "../Globals";
+import { UserContext } from "../contents/UserContext";
 
-const LoginForm = ({ onLogin }) => {
+const LoginForm = () => {
     const [errors, setErrors] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+
+    const { setUser } = useContext(UserContext)
 
     function handleSubmit(values) {
         setIsLoading(true);
@@ -19,7 +22,7 @@ const LoginForm = ({ onLogin }) => {
             setIsLoading(false);
             if (r.status == 200) {
                 r.json().then(user=>{
-                    onLogin(user)
+                    setUser(user)
                 })
             } else {
                 r.json().then((data)=> {
@@ -32,6 +35,7 @@ const LoginForm = ({ onLogin }) => {
             }
         })
     }
+ 
 
     const schema = yup.object({
         username: yup.string().min(3).required(),
