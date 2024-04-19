@@ -3,7 +3,7 @@ import { Button } from '../styles';
 import { useContext } from 'react';
 import { UserContext } from '../contents/UserContext';
 
-function ReviewCard({ review, showReviews, setReviews, reviews, onUpdate }) {
+function ReviewCard({ review, showReviews, setReviews, reviews }) {
     const { rating, comment} = review
     const { user } = useContext(UserContext)
 
@@ -16,6 +16,10 @@ function ReviewCard({ review, showReviews, setReviews, reviews, onUpdate }) {
             setIsUserComment(false)
         }
     },[user])
+
+    function handleUpdateReview() {
+        console.log('edit')
+    }
 
     function handleDeleteReview() {
         // console.log('deleted')
@@ -41,7 +45,7 @@ function ReviewCard({ review, showReviews, setReviews, reviews, onUpdate }) {
             <p>User: {review.user.username}</p>
             <p>Rating: {rating}</p>
             <p>Comment: {comment}</p>
-            {isUserComment && <button onClick={onUpdate}>Edit Review</button>}
+            {isUserComment && <button onClick={handleUpdateReview}>Edit Review</button>}
             {isUserComment && <br></br>}
             {isUserComment && <br></br>}
             {isUserComment && <button onClick={handleDeleteReview}>Delete Review</button>}

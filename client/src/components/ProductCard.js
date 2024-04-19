@@ -10,36 +10,19 @@ function ProductCard({ product }) {
     const [noReviews, setNoReviews] = useState(false)
     const [reviews, setReviews] = useState(product.reviews)
 
-    function handleUpdateReview() {
-        console.log('edit')
-    }
 
     const reviewList = reviews.map(review => {
         return <ReviewCard key={review.id} 
             review={review} 
             showReviews={showReviews}  
             setReviews={setReviews}
-            reviews={reviews}
-            onUpdate={handleUpdateReview}/>
+            reviews={reviews}/>
     })
 
     function handleClick() {
         setShowReviews(!showReviews)
         setNoReviews(!showReviews && reviews.length === 0);
     }
-
-    // function handleDeleteReview() {
-    //     console.log('deleted')
-    //     console.log(product.reviews)
-    //     // fetch("/reviews/{product.review.id}", { method: "DELETE" }).then((r) => {
-    //     //     if (r.status == 204) {
-    //     //       console.log('out');
-    //     //     } 
-    //     // })
-    //     // .catch((error) => {
-    //     //     console.error('Error logging out:', error);
-    //     // });
-    // }   
     
 
     return (
