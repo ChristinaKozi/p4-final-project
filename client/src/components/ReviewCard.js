@@ -43,7 +43,6 @@ function ReviewCard({ review, showReviews, setReviews, reviews }) {
     }   
     
     function handleSubmit(values) {
-        console.log(values)
         fetch(`/reviews/${review.id}`, { 
             method: "PATCH",
             headers: headers,
@@ -92,7 +91,7 @@ function ReviewCard({ review, showReviews, setReviews, reviews }) {
         <>
             {showReviews && (
                 <li>
-                    <Label>User: {review.user.username}</Label>
+                    <h4>User: {review.user.username}</h4>
                     {editing ? (
                         <> 
                         <form onSubmit={formik.handleSubmit} >

@@ -24,6 +24,7 @@ function ReviewForm({ product, reviews, setReviews }) {
                 r.json().then(review=>{
                     setReviews([...reviews, review])
                     resetForm();
+                    setShowReviewForm(false)
                 })
             } else {
                 r.json().then((data)=> {

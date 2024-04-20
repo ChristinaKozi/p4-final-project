@@ -24,7 +24,7 @@ function Button({ variant = "fill", color = "primary", ...props }) {
 
 const ButtonBase = styled.button`
   cursor: pointer;
-  font-size: 1rem;
+  font-size: .9rem;
   border: 1px solid transparent;
   border-radius: 6px;
   padding: 8px 16px;
