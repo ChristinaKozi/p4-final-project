@@ -39,7 +39,7 @@ function ReviewForm({ product, reviews, setReviews }) {
     
                 
     const schema = yup.object({
-        rating: yup.number().positive().min(1).max(5).required(),
+        rating: yup.number().positive().min(0).max(5).required(),
         comment: yup.string().min(3).required()
     })
         
@@ -64,16 +64,16 @@ function ReviewForm({ product, reviews, setReviews }) {
 
     return (
     <>
-        <button type='submit' onClick={handleReviewClick}>
+        <Button type='submit' onClick={handleReviewClick}>
             {showReviewForm? 'Hide Review Form' : 'Add Review'}
-        </button>
+        </Button>
         {showReviewForm ? <form onSubmit={ formik.handleSubmit }>
             <FormField >
                 <br></br>
                 <Label>Rating:</Label>
                 <Input 
                     id='rating'
-                    type='text'
+                    type='number'
                     value={formik.values.rating}
                     onChange={ formik.handleChange }>
                 </Input>

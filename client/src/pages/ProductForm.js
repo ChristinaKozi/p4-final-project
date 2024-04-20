@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import NavBar from "../components/NavBar";
-import { Button, FormField, Input, Label, Error } from "../styles";
+import { Button, FormField, Input, Label, Error, Divider } from "../styles";
 import * as yup from 'yup'
 import { useFormik } from "formik";
 import { headers } from "../Globals";
@@ -61,6 +61,7 @@ function ProductForm() {
         <>
         <NavBar />
         <h1>Add New Product:</h1>
+        <Divider />
         { user ? <>
         <form onSubmit={ formik.handleSubmit }>
             <FormField >

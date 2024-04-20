@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { Button } from '../styles';
+import { Button, Input, Label, Textarea, FormField } from '../styles';
 import { useContext } from 'react';
 import { UserContext } from '../contents/UserContext';
 import { headers } from '../Globals';
+import * as yup from 'yup'
+import { useFormik } from "formik";
 
 function ReviewCard({ review, showReviews, setReviews, reviews }) {
     const { rating, comment} = review
@@ -10,8 +12,6 @@ function ReviewCard({ review, showReviews, setReviews, reviews }) {
 
     const [isUserComment, setIsUserComment] = useState(false)
     const [editing, setEditing] = useState(false)
-    const [editedRating, setEditedRating] = useState(rating);
-    const [editedComment, setEditedComment] = useState(comment);
 
     useEffect(()=>{
         if (user.id === review.user.id) {
@@ -25,35 +25,9 @@ function ReviewCard({ review, showReviews, setReviews, reviews }) {
 
     function handleCancelEdit() {
         setEditing(false);
-        setEditedRating(rating);
-        setEditedComment(comment)
     }
 
-    function handleUpdateReview() {
-        fetch(`/reviews/${review.id}`, { 
-            method: "PATCH",
-            headers: headers,
-        body: JSON.stringify({ rating: editedRating, comment: editedComment }) 
-        })
-        .then((r) => {
-            if (r.status === 202) {
-                const updatedReviews = reviews.map((r) => {
-                    if (r.id === review.id) {
-                        return { ...r, rating: editedRating, comment: editedComment };
-                    }
-                    return r;
-                })
-                setReviews(updatedReviews);
-                setEditing(false);
-            } else {
-                console.error("Failed to update review");
-            }
-        })
-        .catch((error) => {
-            console.error("Error updating review:", error);
-        });
-    }
-
+    
     function handleDeleteReview() {
         fetch(`/reviews/${review.id}`, { method: "DELETE" }).then((r) => {
             if (r.status == 204) {
@@ -67,31 +41,86 @@ function ReviewCard({ review, showReviews, setReviews, reviews }) {
             console.error('Error logging out:', error);
         });
     }   
+    
+    function handleSubmit(values) {
+        console.log(values)
+        fetch(`/reviews/${review.id}`, { 
+            method: "PATCH",
+            headers: headers,
+            body: JSON.stringify(values) 
+        })
+        .then((r) => {
+            if (r.status === 202) {
+                return r.json()
+            }
+        })
+        .then(()=>{
+            const updatedReviews = reviews.map((r) => {
+                if (r.id === review.id) {
+                    return { ...r, rating: values.rating, comment: values.comment };
+                } else {
+                    return r;
+                }
+            });
+            setReviews(updatedReviews);
+            setEditing(false);
+        })
+        .catch((error) => {
+            console.error("Error updating review:", error);
+        });
+    }
+
+    const schema = yup.object({
+        rating: yup.number().positive().min(0).max(5).required(),
+        comment: yup.string().min(3).required()
+    })
+
+    const formik = useFormik({
+        initialValues: {
+            rating: rating,
+            comment: comment
+        },
+        validationSchema: schema,
+        onSubmit: handleSubmit
+    })
+
+    const displayErrors = (error) => {
+        return error ? <p style={{ color: "red" }}>{ error }</p> : null;
+    }
 
     return (
         <>
             {showReviews && (
                 <li>
-                    <p>User: {review.user.username}</p>
+                    <Label>User: {review.user.username}</Label>
                     {editing ? (
-                        <>
-                            <label htmlFor="editedRating">Rating:</label>
-                            <input
-                                type="number"
-                                id="editedRating"
-                                value={editedRating}
-                                onChange={(e) => setEditedRating(e.target.value)}
-                            />
-                            <br />
-                            <label htmlFor="editedComment">Comment:</label>
-                            <textarea
-                                id="editedComment"
-                                value={editedComment}
-                                onChange={(e) => setEditedComment(e.target.value)}
-                            />
-                            <br />
-                            <button onClick={handleUpdateReview}>Save</button>
-                            <button onClick={handleCancelEdit}>Cancel</button>
+                        <> 
+                        <form onSubmit={formik.handleSubmit} >
+                            <FormField>
+                                <Label htmlFor="editedRating">Rating:</Label>
+                                <Input
+                                    id="rating"
+                                    type="number"
+                                    value={formik.values.rating}
+                                    onChange={ formik.handleChange }
+                                />
+                                { displayErrors(formik.errors.rating) }
+                            </FormField>
+                            <FormField >
+                                <Label htmlFor="editedComment">Comment:</Label>
+                                <Textarea
+                                    id="comment"
+                                    type="text"
+                                    value={formik.values.comment}
+                                    onChange={ formik.handleChange }
+                                />
+                                { displayErrors(formik.errors.comment) }
+                            </FormField>
+                            <FormField >
+                                <Button type='submit' >Save</Button> &nbsp;
+                                <Button onClick={handleCancelEdit}>Cancel</Button>
+                            </FormField>
+                        </form>
                         </>
                     ) : (
                         <>
@@ -99,8 +128,8 @@ function ReviewCard({ review, showReviews, setReviews, reviews }) {
                             <p>Comment: {comment}</p>
                             {isUserComment && (
                                 <>
-                                    <button onClick={handleEdit}>Edit Review</button>
-                                    <button onClick={handleDeleteReview}>Delete Review</button>
+                                    <Button onClick={handleEdit}>Edit Review</Button> &nbsp;
+                                    <Button onClick={handleDeleteReview}>Delete Review</Button>
                                 </>
                             )}
                         </>

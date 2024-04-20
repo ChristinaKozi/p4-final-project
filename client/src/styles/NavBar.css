@@ -1,17 +1,18 @@
 .navbar > a{
     display: inline-block;
     box-sizing: border-box;
-    width: 70px;
+    width: 90px;
     padding: 5px;
     margin: 0 6px 6px;
-    background: white;
+    background: indigo;
     text-decoration: none;
     text-align: center;
     font-size: min(10vw, 15px) ;
-    color: black;
+    color: white
 }
   
 a.active {
-    background: black;
-    color: white;
+    background: white;
+    color: indigo;
+    border: 1px solid indigo;
 }

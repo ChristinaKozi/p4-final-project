@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ReviewCard from './ReviewCard'
 import ReviewForm from './ReviewForm'
-import styled from "styled-components";
+import { Button, Label, Divider } from '../styles';
 
 function ProductCard({ product }) {
     const { id, name, description, price } = product
@@ -29,16 +29,16 @@ function ProductCard({ product }) {
         <>
             <Divider />
             <article>
-                <h4>Product Name:</h4>
+                <Label>Product Name:</Label>
                 <p>{name}</p>
                 <h4>Description:</h4>
                 <p>{description}</p>
                 <h4>Price:</h4>
                 <p>{price}</p>
                 <h4>Reviews:</h4>
-                <button onClick={handleClick}>
+                <Button onClick={handleClick}>
                 {showReviews ? 'Hide Reviews' : 'Show Reviews'}
-                </button>
+                </Button>
                 <ul>
                     {noReviews? <p>No Reviews</p> : reviewList}
                 </ul>
@@ -50,8 +50,3 @@ function ProductCard({ product }) {
 
 export default ProductCard;
 
-const Divider = styled.hr`
-  border: none;
-  border-bottom: 1px solid #ccc;
-  margin: 16px 0;
-`;

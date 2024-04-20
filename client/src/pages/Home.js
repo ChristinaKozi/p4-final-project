@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import NavBar from "../components/NavBar";
 import { UserContext } from "../contents/UserContext";
+import { Divider } from "../styles";
 
 function Home() {
     const { user, setUser } = useContext(UserContext)
@@ -9,6 +10,7 @@ function Home() {
         <>
         <NavBar />
         <h1>Home</h1>
+        <Divider/>
         <h2>Hi, {user.username}!</h2>
         <p>Welcome to our online forum where you can navigate through products 
             and there reviews to choose which products work best for you! </p>

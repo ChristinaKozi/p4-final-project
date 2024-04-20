@@ -5,11 +5,11 @@ const Input = styled.input`
   border: 1px solid transparent;
   border-color: #dbdbdb;
   -webkit-appearance: none;
-  max-width: 100%;
-  width: 40%;
+  
+  width: 200px
   font-size: 1rem;
   line-height: 1.5;
-  padding: 4px;
+  padding: 6px;
 `;
 
 export default Input;
