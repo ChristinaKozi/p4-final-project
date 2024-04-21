@@ -3,6 +3,7 @@ import NavBar from "../components/NavBar";
 import ProductCard from "../components/ProductCard";
 import { UserContext } from "../contents/UserContext";
 import { ProductContext } from "../contents/ProductContext";
+import { Divider } from "../styles";
 
 function Products() {
 
@@ -17,6 +18,7 @@ function Products() {
         <>
         <NavBar />
         <h1>Products</h1>
+        <Divider></Divider>
         {user ? productList : <h3>Must be logged in to access</h3>}
         </>
     )
