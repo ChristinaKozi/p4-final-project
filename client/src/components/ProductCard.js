@@ -27,7 +27,6 @@ function ProductCard({ product }) {
 
     return (
         <>
-            <Divider />
             <article>
                 <Label>Product Name:</Label>
                 <p>{name}</p>
