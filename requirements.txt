@@ -16,7 +16,7 @@ flask-migrate==4.0.7
 flask-restful==0.3.10
 flask-sqlalchemy==3.0.5
 gunicorn==22.0.0
-importlib-metadata==7.1.0
+importlib-metadata==6.7.0
 importlib-resources==6.4.0
 ipdb==0.13.9
 ipython==8.12.3
