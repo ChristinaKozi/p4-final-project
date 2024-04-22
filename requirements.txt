@@ -45,7 +45,7 @@ sqlalchemy-serializer==1.4.12
 stack-data==0.6.3
 toml==0.10.2; python_version >= '3.7'
 traitlets==5.14.3; python_version >= '3.8'
-typing-extensions==4.11.0; python_version < '3.9'
+typing-extensions==4.7.1; python_version < '3.9'
 wcwidth==0.2.13
 werkzeug==2.2.2; python_version >= '3.7'
 zipp==3.18.1; python_version >= '3.8'
