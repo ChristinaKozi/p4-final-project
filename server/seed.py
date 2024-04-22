@@ -63,9 +63,10 @@ if __name__ == '__main__':
         print("Starting seed...")
         print("Deleting all records...")
     
+        Review.query.delete()
         User.query.delete()
         Product.query.delete()
-        Review.query.delete()
+        
 
         print("Creating users...")
         users = create_users()

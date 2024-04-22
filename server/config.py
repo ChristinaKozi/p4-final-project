@@ -1,8 +1,11 @@
 # Standard library imports
 import os
 
+from dotenv import load_dotenv
+load_dotenv()
+
 # Remote library imports
-from flask import Flask
+from flask import Flask, render_template
 from flask_bcrypt import Bcrypt
 from flask_cors import CORS
 from flask_migrate import Migrate
@@ -13,7 +16,12 @@ from sqlalchemy import MetaData
 # Local imports
 
 # Instantiate app, set attributes
-app = Flask(__name__)
+app = Flask(
+    __name__,
+    static_url_path='',
+    static_folder='../client/build',
+    template_folder='../client/build'
+)
 app.secret_key = b'Y\xf1Xz\x00\xad|eQ\x80t \xca\x1a\x10K'
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URI')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -28,6 +36,10 @@ migrate = Migrate(app, db)
 db.init_app(app)
 
 bcrypt = Bcrypt(app)
+
+@app.errorhandler(404)
+def not_found(e):
+    return render_template("index.html")
 
 # Instantiate REST API
 api = Api(app)
