@@ -77,7 +77,7 @@ if __name__ == '__main__':
         db.session.add_all(products)
         db.session.commit()
 
-        print("Creating orders...")
+        print("Creating reviews...")
         reviews = create_reviews(products, users)
         db.session.add_all(reviews)
         db.session.commit()
