@@ -15,7 +15,7 @@ flask-cors
 flask-migrate
 flask-restful
 flask-sqlalchemy
-gunicorn
+gunicorn==22.0.0
 importlib-metadata
 importlib-resources
 ipdb
