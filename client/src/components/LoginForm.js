@@ -5,7 +5,7 @@ import { useFormik } from "formik";
 import { headers } from "../Globals";
 import { UserContext } from "../contexts/UserContext";
 
-const LoginForm = () => {
+function LoginForm() {
     const [errors, setErrors] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
@@ -35,7 +35,6 @@ const LoginForm = () => {
             }
         })
     }
- 
 
     const schema = yup.object({
         username: yup.string().min(3).required(),

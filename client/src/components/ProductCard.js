@@ -10,7 +10,6 @@ function ProductCard({ product }) {
     const [noReviews, setNoReviews] = useState(false)
     const [reviews, setReviews] = useState(product.reviews)
 
-
     const reviewList = reviews.map(review => {
         return <ReviewCard key={review.id} 
             review={review} 
@@ -23,7 +22,6 @@ function ProductCard({ product }) {
         setShowReviews(!showReviews)
         setNoReviews(!showReviews && reviews.length === 0);
     }
-    
 
     return (
         <>

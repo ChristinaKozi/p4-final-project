@@ -6,7 +6,6 @@ import { ProductContext } from "../contexts/ProductContext";
 import { Divider } from "../styles";
 
 function Products() {
-
     const { user } = useContext(UserContext)
     const { products } = useContext(ProductContext)
 

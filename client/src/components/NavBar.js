@@ -4,7 +4,6 @@ import "../styles/NavBar.css";
 import { UserContext } from "../contexts/UserContext";
 
 function NavBar() {
-
   const {user, setUser} = useContext(UserContext)
 
   function handleLogoutClick() {
@@ -27,7 +26,7 @@ function NavBar() {
       <NavLink to="/" className="nav-link">
         Home
       </NavLink>
-      <NavLink to="/products" className="nav-link">
+      <NavLink to="/products_list" className="nav-link">
         Products
       </NavLink>
       <NavLink to="/create_product" className="nav-link">

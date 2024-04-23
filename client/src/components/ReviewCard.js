@@ -26,7 +26,6 @@ function ReviewCard({ review, showReviews, setReviews, reviews }) {
     function handleCancelEdit() {
         setEditing(false);
     }
-
     
     function handleDeleteReview() {
         fetch(`/reviews/${review.id}`, { method: "DELETE" }).then((r) => {

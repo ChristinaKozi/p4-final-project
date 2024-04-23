@@ -7,7 +7,6 @@ import { UserContext } from "../contexts/UserContext";
 
 
 function ReviewForm({ product, reviews, setReviews }) {
-
     const [errors, setErrors] = useState([]);
     const [showReviewForm, setShowReviewForm ] = useState(false)
 
@@ -37,7 +36,6 @@ function ReviewForm({ product, reviews, setReviews }) {
             }
         })
     }
-    
                 
     const schema = yup.object({
         rating: yup.number().positive().min(0).max(5).required(),

@@ -13,7 +13,7 @@ const routes = [
         errorElement: <ErrorPage />
     },
     {
-        path: "/products",
+        path: "/products_list",
         element: <Products />,
         errorElement: <ErrorPage />
     },

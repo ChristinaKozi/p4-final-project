@@ -6,7 +6,6 @@ import { headers } from "../Globals";
 import { UserContext } from "../contexts/UserContext";
 
 function SignUpForm() {
-
     const [errors, setErrors] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
