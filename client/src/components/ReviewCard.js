@@ -17,7 +17,7 @@ function ReviewCard({ review, showReviews, setReviews, reviews }) {
         if (user.id === review.user.id) {
             setIsUserComment(true)
         } 
-    },[user])
+    },[user, review.user.id])
 
     function handleEdit() {
         setEditing(true)
