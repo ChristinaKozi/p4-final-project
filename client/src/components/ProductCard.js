@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ReviewCard from './ReviewCard'
 import ReviewForm from './ReviewForm'
-import { Button, Label } from '../styles';
+import { Button, Divider, Label } from '../styles';
 
 function ProductCard({ product }) {
     const { name, description, price } = product
@@ -42,6 +42,7 @@ function ProductCard({ product }) {
                     {noReviews? <p>No Reviews</p> : reviewList}
                 </ul>
                 <ReviewForm product={ product } reviews={reviews} setReviews={setReviews} />
+                <Divider />
             </article>
         </>
     )
