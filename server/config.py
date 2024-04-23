@@ -37,6 +37,12 @@ db.init_app(app)
 
 bcrypt = Bcrypt(app)
 
+@app.route('/')
+@app.route('/<int:id>')
+def index(id=0):
+    return render_template("index.html")
+
+
 @app.errorhandler(404)
 def not_found(e):
     return render_template("index.html")
