@@ -6,12 +6,14 @@ from random import choice as rc, randint
 
 # Remote library imports
 from faker import Faker
+import faker_commerce
 
 # Local imports
 from app import app
 from models import db, User, Review, Product
 
 fake = Faker()
+fake.add_provider(faker_commerce.Provider)
 
 def create_users():
            # make sure users have unique usernames
@@ -38,7 +40,7 @@ def create_products():
     products = []
     for i in range(10):
         product = Product(
-            name = fake.name(),
+            name = fake.ecommerce_name(),
             description = fake.sentence(),
             price = round(random.uniform(1.50, 59.99), 2),
         )

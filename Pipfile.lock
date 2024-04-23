@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "d953cefb17ee2fde2f88d68bf270e3cab445949021e31cc005cf3861b142b498"
+            "sha256": "e02e5aa6c3e2e756f51f8137547921b98942311ad2e1a41b00bee07d3904dd92"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -118,6 +118,14 @@
             "index": "pypi",
             "markers": "python_version >= '3.8'",
             "version": "==24.11.0"
+        },
+        "faker-commerce": {
+            "hashes": [
+                "sha256:6780fe30801aac399a64d421cd85c4593f7cd54d838cb400e8d31e463722622c",
+                "sha256:f53da04143ab70754493fa97c0c64f5208c8f8f3c50273516ee3cafcea372953"
+            ],
+            "index": "pypi",
+            "version": "==1.0.4"
         },
         "flask": {
             "hashes": [

@@ -31,7 +31,7 @@ function ProductCard({ product }) {
                 <h4>Description:</h4>
                 <p>{description}</p>
                 <h4>Price:</h4>
-                <p>{price}</p>
+                <p>${price}</p>
                 <Label>Reviews:</Label>
                 <Button onClick={handleClick}>
                 {showReviews ? 'Hide Reviews' : 'Show Reviews'}
