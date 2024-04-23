@@ -4,8 +4,8 @@ import App from "./components/App";
 import "./index.css";
 import routes from "./routes.js"
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { UserProvider } from "./contents/UserContext.js";
-import { ProductProvider } from "./contents/ProductContext.js";
+import { UserProvider } from "./contexts/UserContext.js";
+import { ProductProvider } from "./contexts/ProductContext.js";
 
 const router = createBrowserRouter(routes);
 
