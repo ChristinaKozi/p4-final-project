@@ -4,8 +4,8 @@ import { Button, FormField, Input, Label, Error, Divider } from "../styles";
 import * as yup from 'yup'
 import { useFormik } from "formik";
 import { headers } from "../Globals";
-import { ProductContext } from "../contents/ProductContext";
-import { UserContext } from "../contents/UserContext";
+import { ProductContext } from "../contexts/ProductContext";
+import { UserContext } from "../contexts/UserContext";
 
 function ProductForm() {
     const { user } = useContext(UserContext)

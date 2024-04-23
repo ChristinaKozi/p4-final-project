@@ -1,8 +1,8 @@
 import React,{ useContext } from "react";
 import NavBar from "../components/NavBar";
 import ProductCard from "../components/ProductCard";
-import { UserContext } from "../contents/UserContext";
-import { ProductContext } from "../contents/ProductContext";
+import { UserContext } from "../contexts/UserContext";
+import { ProductContext } from "../contexts/ProductContext";
 import { Divider } from "../styles";
 
 function Products() {
