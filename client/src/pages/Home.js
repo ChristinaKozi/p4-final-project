@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 import NavBar from "../components/NavBar";
-import { UserContext } from "../contents/UserContext";
+import { UserContext } from "../contexts/UserContext";
 import { Divider } from "../styles";
 
 function Home() {
-    const { user, setUser } = useContext(UserContext)
+    const { user } = useContext(UserContext)
 
     return (
         <>

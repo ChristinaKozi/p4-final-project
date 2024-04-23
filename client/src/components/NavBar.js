@@ -1,11 +1,9 @@
 import React, { useContext } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "../styles/NavBar.css";
-import { Button } from "../styles";
-import { UserContext } from "../contents/UserContext";
+import { UserContext } from "../contexts/UserContext";
 
 function NavBar() {
-  const navigate = useNavigate()
 
   const {user, setUser} = useContext(UserContext)
 
@@ -15,7 +13,7 @@ function NavBar() {
     }
     
     fetch("/logout", { method: "DELETE" }).then((r) => {
-      if (r.status == 401) {
+      if (r.status === 401) {
         setUser(null);
       } 
     })

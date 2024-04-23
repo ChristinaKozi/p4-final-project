@@ -1,12 +1,12 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useContext } from "react";
 import Login from "../pages/Login";
 import Home from "../pages/Home";
-import { UserContext } from "../contents/UserContext";
+import { UserContext } from "../contexts/UserContext";
 
 
 function App() {
 
-  const { user, setUser } = useContext(UserContext)
+  const { user } = useContext(UserContext)
 
   
   if (!user) return <Login />;

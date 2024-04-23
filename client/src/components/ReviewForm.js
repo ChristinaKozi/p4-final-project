@@ -3,7 +3,7 @@ import { Button, FormField, Input, Label, Error } from "../styles";
 import * as yup from 'yup'
 import { useFormik } from "formik";
 import { headers } from "../Globals";
-import { UserContext } from "../contents/UserContext";
+import { UserContext } from "../contexts/UserContext";
 
 
 function ReviewForm({ product, reviews, setReviews }) {

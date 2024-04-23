@@ -1,4 +1,4 @@
-import React,{ useContext, useEffect, useState } from "react";
+import React,{ useContext } from "react";
 import NavBar from "../components/NavBar";
 import ProductCard from "../components/ProductCard";
 import { UserContext } from "../contents/UserContext";
@@ -8,7 +8,7 @@ import { Divider } from "../styles";
 function Products() {
 
     const { user } = useContext(UserContext)
-    const { products, setProducts } = useContext(ProductContext)
+    const { products } = useContext(ProductContext)
 
     const productList = products.map(product=>{
         return <ProductCard key={product.id} product={product} user={user}/>

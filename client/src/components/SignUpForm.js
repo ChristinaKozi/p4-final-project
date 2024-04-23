@@ -1,9 +1,9 @@
 import React, { useState, useContext } from "react";
-import { Box, Button, Error, FormField, Input, Label, Textarea } from "../styles";
+import { Button, Error, FormField, Input, Label } from "../styles";
 import * as yup from 'yup'
 import { useFormik } from 'formik';
 import { headers } from "../Globals";
-import { UserContext } from "../contents/UserContext";
+import { UserContext } from "../contexts/UserContext";
 
 function SignUpForm() {
 
@@ -21,7 +21,7 @@ function SignUpForm() {
         })
         .then((r)=> {
             setIsLoading(false);
-            if (r.status == 201) {
+            if (r.status === 201) {
                 r.json().then(user=>{
                     setUser(user)
                 })

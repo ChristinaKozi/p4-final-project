@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Input, Label, Textarea, FormField } from '../styles';
 import { useContext } from 'react';
-import { UserContext } from '../contents/UserContext';
+import { UserContext } from '../contexts/UserContext';
 import { headers } from '../Globals';
 import * as yup from 'yup'
 import { useFormik } from "formik";
@@ -30,7 +30,7 @@ function ReviewCard({ review, showReviews, setReviews, reviews }) {
     
     function handleDeleteReview() {
         fetch(`/reviews/${review.id}`, { method: "DELETE" }).then((r) => {
-            if (r.status == 204) {
+            if (r.status === 204) {
                 const updatedReviews = reviews.filter((r)=> r.id !== review.id)
                 setReviews(updatedReviews)
             } else {

@@ -14,11 +14,11 @@ from models import User, Product, Review
 
 
 # Views go here!
-class Home(Resource):
-    def get(self):
-        return 'Project Server'
+# class Home(Resource):
+#     def get(self):
+#         return 'Project Server'
     
-api.add_resource(Home, '/')
+# api.add_resource(Home, '/')
 
 class Signup(Resource):
     def post(self):
