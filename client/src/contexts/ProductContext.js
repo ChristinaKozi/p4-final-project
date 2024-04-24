@@ -1,7 +1,6 @@
 import { createContext, useState, useEffect, useContext } from "react";
 import { UserContext } from "./UserContext";
 
-
 const ProductContext = createContext({});
 
 const ProductProvider = ({ children }) => {
