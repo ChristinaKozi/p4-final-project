@@ -55,7 +55,6 @@ class CheckSession(Resource):
 api.add_resource(CheckSession, '/checksession', endpoint = 'checksession')
 
 class Login(Resource):
-
     def post(self):
         data = request.get_json()
         username = data.get('username')
@@ -81,6 +80,17 @@ class Logout(Resource):
         return make_response({'message':'Logged out'}, 401)
 
 api.add_resource(Logout, '/logout', endpoint = 'logout')
+
+class Users(Resource):
+    def get(self):
+        users = User.query.all()
+        if users:
+            user_dict = [user.to_dict() for user in users]
+            return make_response(user_dict, 200)
+        
+        return make_response({'error':'Product not found'}, 404)
+    
+api.add_resource(Users, '/users', endpoint='users')
 
 class Products(Resource):
     def get(self):
