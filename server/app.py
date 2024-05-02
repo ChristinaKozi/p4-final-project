@@ -195,6 +195,14 @@ class ReviewsByID(Resource):
     
 api.add_resource(ReviewsByID, '/reviews/<int:id>')
 
+class ManyReviews(Resource):
+    def get(self, num):
+        products = Product.query.all()
+        return [product.to_dict() for product in products if len(product.reviews) >= num]
+
+api.add_resource(ManyReviews, '/many_reviews/<int:num>')
+
+
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
 

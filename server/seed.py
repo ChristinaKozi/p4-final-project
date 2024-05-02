@@ -67,7 +67,6 @@ if __name__ == '__main__':
         Review.query.delete()
         User.query.delete()
         Product.query.delete()
-        
 
         print("Creating users...")
         users = create_users()
