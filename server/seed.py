@@ -16,7 +16,6 @@ fake = Faker()
 fake.add_provider(faker_commerce.Provider)
 
 def create_users():
-           # make sure users have unique usernames
     users = []
     usernames = []
 

@@ -115,7 +115,7 @@ function ReviewCard({ review, showReviews, setReviews, reviews }) {
                                 { displayErrors(formik.errors.comment) }
                             </FormField>
                             <FormField >
-                                <Button type='submit' >Save</Button> &nbsp;
+                                <Button type='submit'>Save</Button> &nbsp;
                                 <Button onClick={handleCancelEdit}>Cancel</Button>
                             </FormField>
                         </form>

@@ -66,7 +66,8 @@ function ReviewForm({ product, reviews, setReviews }) {
         <Button type='submit' onClick={handleReviewClick}>
             {showReviewForm? 'Hide Review Form' : 'Add Review'}
         </Button>
-        {showReviewForm ? <form onSubmit={ formik.handleSubmit }>
+        {showReviewForm ? 
+        <form onSubmit={ formik.handleSubmit }>
             <FormField >
                 <br></br>
                 <Label>Rating:</Label>

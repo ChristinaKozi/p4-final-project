@@ -7,9 +7,11 @@ const UserProvider = ({ children }) => {
 
     useEffect(() => {
         // auto-login
-        fetch("/checksession").then((r) => {
+        fetch("/checksession")
+        .then((r) => {
           if (r.status === 200) {
-            r.json().then((user) => setUser(user));
+            r.json()
+            .then((user) => setUser(user));
           }
         });
       }, []);

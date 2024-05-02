@@ -13,7 +13,7 @@ function Home() {
         <Divider/>
         <h2>Hi, {user.username}!</h2>
         <p>Welcome to our online forum where you can navigate through products 
-            and there reviews to choose which products work best for you! </p>
+            and their reviews to choose which products work best for you! </p>
             
         <p>If you love (or hate) a product and would like to recommend it to others (or warn them),
              you can create a product listing of your own!</p>
