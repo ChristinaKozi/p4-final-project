@@ -28,7 +28,8 @@ function ReviewCard({ review, showReviews, setReviews, reviews }) {
     }
     
     function handleDeleteReview() {
-        fetch(`/reviews/${review.id}`, { method: "DELETE" }).then((r) => {
+        fetch(`/reviews/${review.id}`, { method: "DELETE" })
+        .then((r) => {
             if (r.status === 204) {
                 const updatedReviews = reviews.filter((r)=> r.id !== review.id)
                 setReviews(updatedReviews)

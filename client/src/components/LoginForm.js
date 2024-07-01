@@ -21,9 +21,8 @@ function LoginForm() {
         .then((r)=> {
             setIsLoading(false);
             if (r.status === 200) {
-                r.json().then(user=>{
-                    setUser(user)
-                })
+                r.json()
+                .then(user=>{setUser(user)})
             } else {
                 r.json().then((data)=> {
                     if (data.error) {

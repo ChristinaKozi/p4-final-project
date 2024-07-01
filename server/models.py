@@ -29,7 +29,7 @@ class User(db.Model, SerializerMixin):
     reviews = db.relationship('Review', back_populates = 'user', cascade='all, delete-orphan')
 
     def __repr__(self):
-        return f'<User {self.id}: {self.name}'
+        return f'<User {self.id}: {self.username}'
 
 class Product(db.Model, SerializerMixin):
     __tablename__ = 'products'
@@ -38,7 +38,7 @@ class Product(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
     description = db.Column(db.String)
-    price = db.Column(db.Float)
+    price = db.Column(db.Float) 
 
     reviews = db.relationship('Review', back_populates = 'product', cascade='all, delete-orphan')
 

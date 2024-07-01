@@ -150,7 +150,7 @@ app.py houses all of the functionalities that the database carries out. Below is
 -ReviewsByID: Retrieves, updates, or deletes a specific review by its ID.
 
 #### `models.py`
-Here you'll find three models: User, Model, Product. The models User and Product share a many to many relationship with Reviews hacing a one to many relationship to both User and Product.
+Here you'll find three models: User, Review, Product. The models User and Product share a many to many relationship via Reviews as it has having a one to many relationship to both User and Product.
 
 #### `seed.py` 
 The seed file contains test data for the application from the faker import, which you can compile by running:

@@ -26,10 +26,10 @@ function NavBar() {
       <NavLink to="/" className="nav-link">
         Home
       </NavLink>
-      <NavLink to="/products_list" className="nav-link">
+      <NavLink to="/products" className="nav-link">
         Products
       </NavLink>
-      <NavLink to="/create_product" className="nav-link">
+      <NavLink to="/products/new" className="nav-link">
         Add Product
       </NavLink>
       <NavLink to='/' className="nav-link" onClick={handleLogoutClick}>

@@ -12,14 +12,6 @@ from config import app, db, api
 # Add your model imports
 from models import User, Product, Review
 
-
-# Views go here!
-# class Home(Resource):
-#     def get(self):
-#         return 'Project Server'
-    
-# api.add_resource(Home, '/')
-
 class Signup(Resource):
     def post(self):
         data = request.get_json()
@@ -70,7 +62,6 @@ class Login(Resource):
             return make_response({'error': 'Database integrity error'}, 500)
         except Exception as e:
             return make_response({'error': str(e)}, 500)
-
 
 api.add_resource(Login, '/login', endpoint='login')
 
@@ -191,7 +182,7 @@ class ReviewsByID(Resource):
 
             return make_response({'message':'Review Deleted'}, 204)
         
-        return make_response({"error": "Product not found"}, 404)
+        return make_response({"error": "Review not found"}, 404)
     
 api.add_resource(ReviewsByID, '/reviews/<int:id>')
 
